@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:go_router/go_router.dart';
+import 'package:supono/app/routes/app_route_config.dart';
 import 'package:supono/app/routes/app_route_constants.dart';
 import 'package:supono/l10n/l10n.dart';
 import 'package:supono/screens/onboarding/add_photo_page.dart';
@@ -49,6 +50,9 @@ extension OnboardingX on Onboarding {
     }
   }
 
+  int get percentage =>
+      ((100 / (Onboarding.values.length - 1)) * index).round();
+
   String get image {
     switch (this) {
       case Onboarding.splash:
@@ -79,32 +83,20 @@ extension OnboardingX on Onboarding {
     }
   }
 
-  static GoRoute get route {
-    final onboardingSteps = [
-      Onboarding.splash,
-      Onboarding.birthday,
-      Onboarding.nickname,
-      Onboarding.gender,
-      Onboarding.addPhoto,
-    ];
+  GoRoute get route => GoRoute(
+        path: path,
+        pageBuilder: (context, state) =>
+            AppRouteConfig.buildPageWithDefaultTransition<void>(
+          state: state,
+          child: page,
+        ),
+      );
 
-    GoRoute createRoute(Onboarding step, List<Onboarding> remainingSteps) {
-      if (remainingSteps.isEmpty) {
-        return GoRoute(
-          path: step.path,
-          builder: (context, state) => step.page,
-        );
-      } else {
-        return GoRoute(
-          path: step.path,
-          builder: (context, state) => step.page,
-          routes: [
-            createRoute(remainingSteps.first, remainingSteps.sublist(1)),
-          ],
-        );
-      }
+  void pushNext(BuildContext context) {
+    final nextIndex = index + 1;
+    if (nextIndex < Onboarding.values.length) {
+      final nextStep = Onboarding.values[nextIndex];
+      context.push(nextStep.path);
     }
-
-    return createRoute(onboardingSteps.first, onboardingSteps.sublist(1));
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supono/app/enums/onboarding.dart';
 import 'package:supono/app/routes/app_route_constants.dart';
@@ -5,20 +6,42 @@ import 'package:supono/screens/camera/camera_page.dart';
 import 'package:supono/screens/settings/settings_page.dart';
 
 class AppRouteConfig {
+  static CustomTransitionPage<void> buildPageWithDefaultTransition<T>({
+    required GoRouterState state,
+    required Widget child,
+  }) {
+    return CustomTransitionPage<T>(
+      key: state.pageKey,
+      child: child,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+          FadeTransition(opacity: animation, child: child),
+    );
+  }
+
   static GoRouter returnRouter({bool isOnboardingCompleted = true}) {
     final router = GoRouter(
       initialLocation: isOnboardingCompleted
           ? AppRouteConstants.camera
           : AppRouteConstants.splash,
       routes: <GoRoute>[
-        OnboardingX.route,
+        Onboarding.splash.route,
+        Onboarding.birthday.route,
+        Onboarding.nickname.route,
+        Onboarding.gender.route,
+        Onboarding.addPhoto.route,
         GoRoute(
           path: AppRouteConstants.camera,
-          builder: (context, state) => const CameraPage(),
+          pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+            state: state,
+            child: const CameraPage(),
+          ),
         ),
         GoRoute(
           path: AppRouteConstants.settings,
-          builder: (context, state) => const SettingsPage(),
+          pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+            state: state,
+            child: const SettingsPage(),
+          ),
         ),
       ],
     );
