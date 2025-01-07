@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:supono/counter/counter.dart';
+import 'package:supono/app/routes/app_route_config.dart';
 import 'package:supono/l10n/l10n.dart';
 
 class App extends StatelessWidget {
@@ -7,16 +7,17 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    final router = AppRouteConfig.returnRouter(isOnboardingCompleted: false);
+
+    return MaterialApp.router(
+      title: 'Flutter Demo',
+      routerConfig: router,
       theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        ),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
     );
   }
 }

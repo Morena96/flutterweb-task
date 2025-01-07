@@ -1,6 +1,28 @@
 {
     "@@locale": "en",
     "counterAppBarTitle": "Counter",
+    "whensYourBirthday": "When's your birthday?", 
+    "chooseYourNickname": "Choose your nickname",
+    "whichGenderDoYou":"Which gender do\nyou identify as?",
+    "whichGenderDoYouSubtitle":"Your gender helps us find the right matches for you.",
+    "addNicePhoto":"Add a nice photo\nof yourself",
+    "day":"Day",
+    "month":"Month",
+    "year":"Year",
+    "takeYourFirstPhoto":"Take your first photo",
+    "makeSureThatYourImage":"Make sure that your image",
+    "showsYourFaceClearly":"Shows your face clearly",
+    "yourselfOnly":"Yourself only, no group pic",
+    "noFakePic":"No fake pic, object or someone else",
+    "unlockApp":"Unlock App",
+    "settings":"Settings",
+    "rateUs":"Rate Us",
+    "myAccount":"My Account",
+    "username":"Username",
+    "birthday":"Birthday",
+    "areYourReadyForTheTest":"Are you ready for\nyour test?",
+    "startNowByCreating":"Start now by creating your profile and connect!",
+    "continueT":"Continue",
     "@counterAppBarTitle": {
         "description": "Text shown in the AppBar of the Counter Page"
     }
