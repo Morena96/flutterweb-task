@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:in_app_review/in_app_review.dart';
 import 'package:supono/app/theme/app_colors.dart';
 import 'package:supono/app/theme/app_text_style.dart';
 import 'package:supono/app/widgets/app_back_button.dart';
 import 'package:supono/l10n/l10n.dart';
 import 'package:supono/screens/camera/cubit/user_form_cubit.dart';
 
-class SettingsPage extends StatelessWidget {
+class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
+
+  @override
+  State<SettingsPage> createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  final _inAppReview = InAppReview.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +43,10 @@ class SettingsPage extends StatelessWidget {
                 children: [
                   listTile(title: context.l10n.unlockApp, onTap: () {}),
                   const Divider(color: AppColors.dividerColor),
-                  listTile(title: context.l10n.rateUs, onTap: () {}),
+                  listTile(
+                    title: context.l10n.rateUs,
+                    onTap: _inAppReview.requestReview,
+                  ),
                 ],
               ),
             ),
