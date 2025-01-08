@@ -16,6 +16,13 @@ class AppTextStyle {
     height: 1.36,
   );
 
+  static const TextStyle white20w800 = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w800,
+    color: AppColors.white,
+    height: 34 / 20,
+  );
+
   static const TextStyle white23w800 = TextStyle(
     fontSize: 23,
     fontWeight: FontWeight.w800,

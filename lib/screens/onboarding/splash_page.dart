@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:supono/app/enums/onboarding.dart';
 import 'package:supono/app/theme/app_colors.dart';
 import 'package:supono/app/theme/app_text_style.dart';
+import 'package:supono/app/widgets/app_button_white.dart';
 import 'package:supono/l10n/l10n.dart';
 import 'package:supono/screens/onboarding/widgets/onboarding_widget.dart';
 
@@ -34,20 +35,9 @@ class SplashPage extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
+            AppButtonWhite(
+              title: context.l10n.continueT,
               onPressed: () => Onboarding.splash.pushNext(context),
-              style: ElevatedButton.styleFrom(
-                overlayColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                padding:
-                    const EdgeInsets.symmetric(vertical: 14, horizontal: 60),
-              ),
-              child: Text(
-                context.l10n.continueT,
-                style: AppTextStyle.black17w700,
-              ),
             ),
             const SizedBox(height: 70),
           ],
