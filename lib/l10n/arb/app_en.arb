@@ -23,6 +23,9 @@
     "areYourReadyForTheTest":"Are you ready for\nyour test?",
     "startNowByCreating":"Start now by creating your profile and connect!",
     "continueT":"Continue",
+    "male":"Male",
+    "female":"Female",
+    "other":"Other",
     "@counterAppBarTitle": {
         "description": "Text shown in the AppBar of the Counter Page"
     }
