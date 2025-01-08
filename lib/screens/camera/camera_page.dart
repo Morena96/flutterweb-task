@@ -8,9 +8,9 @@ import 'package:supono/app/theme/app_colors.dart';
 import 'package:supono/app/widgets/app_back_button.dart';
 
 class CameraPage extends StatefulWidget {
-  const CameraPage(this.camera, {super.key});
+  const CameraPage(this.cameras, {super.key});
 
-  final CameraDescription camera;
+  final List<CameraDescription> cameras;
 
   @override
   State<CameraPage> createState() => _CameraPageState();
@@ -19,12 +19,13 @@ class CameraPage extends StatefulWidget {
 class _CameraPageState extends State<CameraPage> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
+  int activeCamera = 1;
 
   @override
   void initState() {
     super.initState();
     _controller = CameraController(
-      widget.camera,
+      widget.cameras[activeCamera],
       ResolutionPreset.medium,
     );
 
@@ -47,10 +48,10 @@ class _CameraPageState extends State<CameraPage> {
             return Stack(
               children: [
                 FittedBox(
-                  fit: BoxFit.fitWidth,
+                  fit: BoxFit.cover,
                   child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.sizeOf(context).width,
+                    height: MediaQuery.sizeOf(context).height,
                     child: CameraPreview(_controller),
                   ),
                 ),
@@ -62,7 +63,19 @@ class _CameraPageState extends State<CameraPage> {
                 Positioned(
                   top: 60,
                   right: 25,
-                  child: AppBackButton(onPressed: context.pop),
+                  child: AppBackButton(
+                    icon: 'assets/icons/refresh.svg',
+                    onPressed: () {
+                      setState(() {
+                        _controller = CameraController(
+                          widget.cameras[1 - activeCamera],
+                          ResolutionPreset.medium,
+                        );
+
+                        _initializeControllerFuture = _controller.initialize();
+                      });
+                    },
+                  ),
                 ),
                 Positioned(
                   bottom: 20,

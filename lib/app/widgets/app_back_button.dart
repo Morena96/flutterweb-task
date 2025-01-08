@@ -5,10 +5,12 @@ import 'package:supono/app/theme/app_decoration.dart';
 class AppBackButton extends StatelessWidget {
   const AppBackButton({
     required this.onPressed,
+    this.icon,
     super.key,
   });
 
   final VoidCallback onPressed;
+  final String? icon;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,7 @@ class AppBackButton extends StatelessWidget {
         width: 44,
         alignment: Alignment.center,
         decoration: AppDecoration.greyCircleBorder,
-        child: SvgPicture.asset('assets/icons/back.svg'),
+        child: SvgPicture.asset(icon ?? 'assets/icons/back.svg'),
       ),
     );
   }

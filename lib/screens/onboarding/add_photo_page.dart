@@ -45,7 +45,7 @@ class _AddPhotoPageState extends State<AddPhotoPage> {
               } else {
                 context.push(
                   AppRouteConstants.camera,
-                  extra: cameras[1],
+                  extra: cameras,
                 );
               }
             },

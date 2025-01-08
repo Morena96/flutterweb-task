@@ -64,4 +64,15 @@ class User {
       'gender': gender?.index,
     };
   }
+
+  String get birthdayString {
+    final b = DateTime(
+      birthY ?? DateTime.now().year,
+      birthM ?? DateTime.now().month,
+      birthD ?? DateTime.now().day,
+    );
+
+    return '${b.day.toString().padLeft(2, '0')}'
+        '/${b.month.toString().padLeft(2, '0')}/${b.year}';
+  }
 }

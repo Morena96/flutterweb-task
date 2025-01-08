@@ -24,7 +24,7 @@ class AppRouteConfig {
     final router = GoRouter(
       initialLocation: isOnboardingCompleted
           ? AppRouteConstants.home
-          : AppRouteConstants.addPhoto,
+          : AppRouteConstants.splash,
       routes: <GoRoute>[
         Onboarding.splash.route,
         Onboarding.birthday.route,
@@ -35,7 +35,7 @@ class AppRouteConfig {
           path: AppRouteConstants.camera,
           pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
             state: state,
-            child: CameraPage(state.extra! as CameraDescription),
+            child: CameraPage(state.extra! as List<CameraDescription>),
           ),
         ),
         GoRoute(
