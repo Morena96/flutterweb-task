@@ -42,7 +42,7 @@ class AppRouteConfig {
           path: AppRouteConstants.home,
           pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
             state: state,
-            child: HomePage(state.extra! as XFile),
+            child: const HomePage(),
           ),
         ),
         GoRoute(

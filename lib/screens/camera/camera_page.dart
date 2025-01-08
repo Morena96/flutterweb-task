@@ -2,10 +2,12 @@
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supono/app/routes/app_route_constants.dart';
 import 'package:supono/app/theme/app_colors.dart';
 import 'package:supono/app/widgets/app_back_button.dart';
+import 'package:supono/screens/camera/cubit/user_form_cubit.dart';
 
 class CameraPage extends StatefulWidget {
   const CameraPage(this.cameras, {super.key});
@@ -90,10 +92,9 @@ class _CameraPageState extends State<CameraPage> {
 
                         if (!context.mounted) return;
 
-                        await context.push(
-                          AppRouteConstants.home,
-                          extra: image,
-                        );
+                        context.read<UserFormCubit>().changeUserAvatar(image);
+
+                        await context.push(AppRouteConstants.home);
                       } catch (e) {
                         print(e);
                       }
@@ -116,7 +117,7 @@ class _CameraPageState extends State<CameraPage> {
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             );
           } else {

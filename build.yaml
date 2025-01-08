@@ -6,5 +6,8 @@ targets:
           auto_register: false 
         generate_for:
           include:
+            - lib/app/injection/**.dart
+            - lib/data/network/**.dart
+            - lib/data/storage/**.dart
             - lib/**_bloc.dart
             - lib/**_cubit.dart

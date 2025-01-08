@@ -1,12 +1,30 @@
+import 'dart:convert';
+
 import 'package:bloc/bloc.dart';
+import 'package:camera/camera.dart';
 import 'package:dartz/dartz.dart';
+import 'package:injectable/injectable.dart';
+import 'package:supono/app/data/app_query_params.dart';
 import 'package:supono/app/enums/gender.dart';
 import 'package:supono/data/network/user.dart';
+import 'package:supono/data/storage/local_storage.dart';
 
 part 'user_form_state.dart';
 
+@injectable
 class UserFormCubit extends Cubit<UserFormState> {
-  UserFormCubit() : super(UserFormState.initial());
+  UserFormCubit(this._localStorage) : super(UserFormState.initial());
+
+  final LocalStorage _localStorage;
+
+  void initializeUser(User? user) {
+    emit(
+      state.copyWith(
+        user: user,
+        optionOfSuccessOrFailure: none(),
+      ),
+    );
+  }
 
   void nicknameChanged(String nickname) => emit(
         state.copyWith(
@@ -21,6 +39,34 @@ class UserFormCubit extends Cubit<UserFormState> {
           optionOfSuccessOrFailure: none(),
         ),
       );
+
+  void changeUserAvatar(XFile avatar) {
+    emit(
+      state.copyWith(
+        user: state.user.copyWith(avatar: avatar.path),
+        optionOfSuccessOrFailure: none(),
+      ),
+    );
+
+    _localStorage.setString(
+      AppQueryParams.userInfo,
+      json.encode(state.user.copyWith(avatar: avatar.path).toJson()),
+    );
+  }
+
+  void unlockApp() {
+    emit(
+      state.copyWith(
+        user: state.user.copyWith(isAppUnlocked: true),
+        optionOfSuccessOrFailure: none(),
+      ),
+    );
+
+    _localStorage.setString(
+      AppQueryParams.userInfo,
+      json.encode(state.user.copyWith(isAppUnlocked: true).toJson()),
+    );
+  }
 
   void birthdayChanged(String birthday) {
     final day = int.tryParse(birthday);

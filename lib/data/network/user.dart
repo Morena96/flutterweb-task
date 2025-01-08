@@ -8,6 +8,8 @@ class User {
     this.birthD,
     this.birthM,
     this.birthY,
+    this.avatar,
+    this.isAppUnlocked = false,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -18,6 +20,8 @@ class User {
       nickname: json['nickname'] as String?,
       gender:
           json['gender'] != null ? Gender.values[json['gender'] as int] : null,
+      avatar: json['avatar'] as String?,
+      isAppUnlocked: json['isAppUnlocked'] as bool? ?? false,
     );
 
     return user.copyWith(
@@ -35,6 +39,8 @@ class User {
   final int? birthD;
   final int? birthM;
   final int? birthY;
+  final String? avatar;
+  final bool isAppUnlocked;
 
   User copyWith({
     DateTime? birthday,
@@ -43,6 +49,8 @@ class User {
     int? birthD,
     int? birthM,
     int? birthY,
+    String? avatar,
+    bool? isAppUnlocked,
   }) =>
       User(
         birthday: birthday ?? this.birthday,
@@ -51,6 +59,8 @@ class User {
         birthD: birthD ?? this.birthD,
         birthM: birthM ?? this.birthM,
         birthY: birthY ?? this.birthY,
+        avatar: avatar ?? this.avatar,
+        isAppUnlocked: isAppUnlocked ?? this.isAppUnlocked,
       );
 
   Map<String, dynamic> toJson() {
@@ -62,6 +72,8 @@ class User {
       ).toIso8601String(),
       'nickname': nickname,
       'gender': gender?.index,
+      'avatar': avatar,
+      'isAppUnlocked': isAppUnlocked,
     };
   }
 
