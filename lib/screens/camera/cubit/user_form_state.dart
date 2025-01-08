@@ -54,6 +54,4 @@ class UserFormState {
 
   bool get isNicknameValid =>
       user.nickname != null && user.nickname!.isNotEmpty;
-
-  bool get isGenderValid => user.gender != null;
 }

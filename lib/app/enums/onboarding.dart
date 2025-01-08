@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:supono/app/routes/app_route_config.dart';
 import 'package:supono/app/routes/app_route_constants.dart';
 import 'package:supono/l10n/l10n.dart';
+import 'package:supono/screens/camera/cubit/user_form_cubit.dart';
 import 'package:supono/screens/onboarding/add_photo_page.dart';
 import 'package:supono/screens/onboarding/birthday_page.dart';
 import 'package:supono/screens/onboarding/gender_page.dart';
@@ -19,7 +20,7 @@ extension OnboardingX on Onboarding {
       case Onboarding.nickname:
         return context.l10n.chooseYourNickname;
       case Onboarding.addPhoto:
-        return context.l10n.takeYourFirstPhoto;
+        return context.l10n.addNicePhoto;
       case Onboarding.gender:
         return context.l10n.whichGenderDoYou;
       case Onboarding.splash:
@@ -97,6 +98,21 @@ extension OnboardingX on Onboarding {
     if (nextIndex < Onboarding.values.length) {
       final nextStep = Onboarding.values[nextIndex];
       context.push(nextStep.path);
+    }
+  }
+
+  bool isNextAvailable(UserFormState state) {
+    switch (this) {
+      case Onboarding.splash:
+        return false;
+      case Onboarding.birthday:
+        return state.isBirthdayValid;
+      case Onboarding.nickname:
+        return state.isNicknameValid;
+      case Onboarding.gender:
+        return false;
+      case Onboarding.addPhoto:
+        return false;
     }
   }
 }

@@ -4,9 +4,20 @@ import 'package:supono/app/theme/app_colors.dart';
 class AppDecoration {
   const AppDecoration._();
 
+  static BoxDecoration get whiteCircleBorder => BoxDecoration(
+        color: AppColors.white,
+        shape: BoxShape.circle,
+        border: Border.all(width: 2),
+      );
+
   static BoxDecoration get greyCircleBorder => BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(color: AppColors.grey),
+      );
+
+  static BoxDecoration get greyBorder15 => BoxDecoration(
+        border: Border.all(color: AppColors.grey),
+        borderRadius: BorderRadius.circular(15),
       );
 
   static InputDecoration get inputDecoration => InputDecoration(

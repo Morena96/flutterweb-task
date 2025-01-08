@@ -8,7 +8,7 @@ part 'user_form_state.dart';
 class UserFormCubit extends Cubit<UserFormState> {
   UserFormCubit() : super(UserFormState.initial());
 
-  void nameChanged(String nickname) => emit(
+  void nicknameChanged(String nickname) => emit(
         state.copyWith(
           user: state.user.copyWith(nickname: nickname),
           optionOfSuccessOrFailure: none(),
@@ -24,7 +24,15 @@ class UserFormCubit extends Cubit<UserFormState> {
 
   void birthdayChanged(String birthday) {
     final day = int.tryParse(birthday);
-    if (day == null || day < 1 || day > 31) return;
+    if (day == null || day < 1 || day > 31) {
+      emit(
+        state.copyWith(
+          user: state.user.copyWith(birthD: -1),
+          optionOfSuccessOrFailure: none(),
+        ),
+      );
+      return;
+    }
 
     emit(
       state.copyWith(
@@ -36,7 +44,15 @@ class UserFormCubit extends Cubit<UserFormState> {
 
   void birthMonthChanged(String birthMonth) {
     final month = int.tryParse(birthMonth);
-    if (month == null || month < 1 || month > 12) return;
+    if (month == null || month < 1 || month > 12) {
+      emit(
+        state.copyWith(
+          user: state.user.copyWith(birthM: -1),
+          optionOfSuccessOrFailure: none(),
+        ),
+      );
+      return;
+    }
 
     emit(
       state.copyWith(
@@ -48,7 +64,15 @@ class UserFormCubit extends Cubit<UserFormState> {
 
   void birthYearChanged(String birthYear) {
     final year = int.tryParse(birthYear);
-    if (year == null || year < 1900 || year > DateTime.now().year) return;
+    if (year == null || year < 1900 || year > DateTime.now().year) {
+      emit(
+        state.copyWith(
+          user: state.user.copyWith(birthY: -1),
+          optionOfSuccessOrFailure: none(),
+        ),
+      );
+      return;
+    }
 
     emit(
       state.copyWith(
