@@ -26,6 +26,7 @@
     "male":"Male",
     "female":"Female",
     "other":"Other",
+    "noAvailableCamera": "No available camera",
     "@counterAppBarTitle": {
         "description": "Text shown in the AppBar of the Counter Page"
     }

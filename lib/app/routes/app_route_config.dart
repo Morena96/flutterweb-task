@@ -1,8 +1,10 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supono/app/enums/onboarding.dart';
 import 'package:supono/app/routes/app_route_constants.dart';
 import 'package:supono/screens/camera/camera_page.dart';
+import 'package:supono/screens/home/home_page.dart';
 import 'package:supono/screens/settings/settings_page.dart';
 
 class AppRouteConfig {
@@ -21,8 +23,8 @@ class AppRouteConfig {
   static GoRouter returnRouter({bool isOnboardingCompleted = true}) {
     final router = GoRouter(
       initialLocation: isOnboardingCompleted
-          ? AppRouteConstants.camera
-          : AppRouteConstants.splash,
+          ? AppRouteConstants.home
+          : AppRouteConstants.addPhoto,
       routes: <GoRoute>[
         Onboarding.splash.route,
         Onboarding.birthday.route,
@@ -33,7 +35,14 @@ class AppRouteConfig {
           path: AppRouteConstants.camera,
           pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
             state: state,
-            child: const CameraPage(),
+            child: CameraPage(state.extra! as CameraDescription),
+          ),
+        ),
+        GoRoute(
+          path: AppRouteConstants.home,
+          pageBuilder: (context, state) => buildPageWithDefaultTransition<void>(
+            state: state,
+            child: HomePage(state.extra! as XFile),
           ),
         ),
         GoRoute(

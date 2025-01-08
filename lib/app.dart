@@ -28,11 +28,12 @@ class MaterialAppWidget extends StatelessWidget {
       title: 'Flutter Demo',
       routerConfig: router,
       theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-          textTheme: const TextTheme(
-            bodyLarge: AppTextStyle.white25w800,
-          )),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+        textTheme: const TextTheme(
+          bodyLarge: AppTextStyle.white25w800,
+        ),
+      ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
     );
